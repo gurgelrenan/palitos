@@ -7,6 +7,10 @@
 //
 
 #include <stdio.h>
+int is_par(int number);
+void jogo_par_ou_impar();
+void jogo_nim();
+
 
 int main(int argc, const char * argv[]) {
     int matricula;
@@ -55,6 +59,27 @@ int main(int argc, const char * argv[]) {
     printf("A soma da sua matricula é: %d \n", sum_matricula);
 	
 //	fim soma matricula
+	if (is_par(sum_matricula) == 1) {
+		jogo_par_ou_impar();
+	} else {
+		jogo_nim();
+	}
 	
     return 0;
+}
+
+int is_par(int number) {
+	if (number % 2 == 0) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+void jogo_par_ou_impar() {
+	printf("teste par ou impar");
+}
+
+void jogo_nim() {
+	printf("jogo nim");
 }
