@@ -77,7 +77,27 @@ int is_par(int number) {
 }
 
 void jogo_par_ou_impar() {
-	printf("teste par ou impar");
+	printf("Comecando Jogo par ou impar.....\n");
+	int qtd_palitos = 15;
+	int qtd_para_remover;
+	int qtd_jogadores;
+	int i;
+	
+	printf("Informe a quantidade de jogadores: \n");
+	scanf("%d", &qtd_jogadores);
+	
+	int jogadores[qtd_jogadores];
+	
+//	inicializar array dos jogadores com zero palitos em cada
+	for (i = 0;i < qtd_jogadores; i++){
+		jogadores[i] = 0;
+	}
+	
+	while (qtd_palitos != 0) {
+		printf("Digite quantos palitos deseja remover: \n");
+		scanf("%d", &qtd_para_remover);
+		qtd_palitos = qtd_palitos - qtd_para_remover;
+	}
 }
 
 void jogo_nim() {
