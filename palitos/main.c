@@ -102,27 +102,56 @@ void jogo_par_ou_impar() {
 		jogadores[i] = 0;
 	}
 	
+	int j;
+	
 	while (qtd_palitos > 0) {
-		printf("Digite quantos palitos deseja remover: \n");
-		scanf("%d",&qtd_para_remover);
+		for (j = 0; j < 2; j++) {
+			if (j == 0) {
+				printf("Vez do jogador: %s \n", nome_jogador1);
+			} else {
+				printf("Vez do jogador: %s \n", nome_jogador2);
+			}
+			
+			printf("Digite quantos palitos deseja remover: \n");
+			scanf("%d",&qtd_para_remover);
 		
-	    // verifica se pediu para tirar menos q 4 palitos e pelo menos 1
-		if (qtd_para_remover < 1 || qtd_para_remover > 3) {
-			printf("Remova de 1 a 3 palitos \n");
-		} else
-		// verifica se a quantidade que o jogador quer tirar, ainda pode ser tirada
-		if ((qtd_palitos - qtd_para_remover) < 0 ) {
-			printf("Voce pode remover apenas %d palito(s) \n", qtd_palitos);
-		} else {
-			printf("Removendo %d palitos \n", qtd_para_remover);
-			qtd_palitos = qtd_palitos - qtd_para_remover;
-			printf("Restam %d palitos \n", qtd_palitos);
-			qtd_para_remover = 0;
+			// verifica se pediu para tirar menos q 4 palitos e pelo menos 1
+			if (qtd_para_remover < 1 || qtd_para_remover > 3) {
+				printf("Remova de 1 a 3 palitos \n");
+				break;
+			} else
+				// verifica se a quantidade que o jogador quer tirar, ainda pode ser tirada
+				if ((qtd_palitos - qtd_para_remover) < 0 ) {
+					printf("Voce pode remover apenas %d palito(s) \n", qtd_palitos);
+					break;
+			} else {
+				printf("Removendo %d palitos \n", qtd_para_remover);
+				qtd_palitos = qtd_palitos - qtd_para_remover;
+				// adicionando os palitos removidos para o jogador q removeu
+				jogadores[j] += qtd_para_remover;
+				
+				if (j == 0) {
+					printf("O jogador: %s tem agora %d palitos \n", nome_jogador1, jogadores[j]);
+				} else {
+					printf("O jogador: %s tem agora %d palitos \n", nome_jogador2, jogadores[j]);
+				}
+
+
+				printf("Palitos do jogador 1: %d \n", jogadores[0]);
+				printf("Palitos do jogador 2: %d \n", jogadores[1]);
+				printf("Restam %d palitos \n", qtd_palitos);
+				qtd_para_remover = 0;
+			}
 		}
 	}
 	
-	printf("-----------------Fim do jogo!-------------------------");
 	
+	if (!is_par(jogadores[0])) {
+		printf("O jogador %s venceu!!!", nome_jogador1);
+	} else {
+		printf("O jogador %s venceu!!!", nome_jogador2);
+	}
+	printf("-----------------Fim do jogo!-------------------------");
 }
 
 void jogo_nim() {
