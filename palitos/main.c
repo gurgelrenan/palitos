@@ -48,9 +48,9 @@ int main(int argc, const char * argv[]) {
     int sum = 0;
     
     for (i=0;i<c;i++) {
-        printf("Posicao %d: ", i);
-        printf("%d", numberArray[i]);
-        printf("\n");
+//        printf("Posicao %d: ", i);
+//        printf("%d", numberArray[i]);
+//        printf("\n");
         sum = sum + numberArray[i];
     }
     
@@ -59,13 +59,15 @@ int main(int argc, const char * argv[]) {
     printf("A soma da sua matricula é: %d \n", sum_matricula);
 	
 //	fim soma matricula
+	
 	if (is_par(sum_matricula) == 1) {
 		jogo_par_ou_impar();
+		return 0;
 	} else {
 		jogo_nim();
 	}
 	
-    return 0;
+	return 0;
 }
 
 int is_par(int number) {
@@ -79,25 +81,48 @@ int is_par(int number) {
 void jogo_par_ou_impar() {
 	printf("Comecando Jogo par ou impar.....\n");
 	int qtd_palitos = 15;
-	int qtd_para_remover;
-	int qtd_jogadores;
+	int qtd_para_remover = 0;
 	int i;
+	int jogadores[2];
+	char nome_jogador1[30];
+	char nome_jogador2[30];
 	
-	printf("Informe a quantidade de jogadores: \n");
-	scanf("%d", &qtd_jogadores);
+	printf("Nome jogador 1: ");
+	scanf("%s",nome_jogador1);
+	printf("Bem vindo %s. \n",nome_jogador1);
+
 	
-	int jogadores[qtd_jogadores];
+	printf("Nome jogador 2: ");
+	scanf("%s",nome_jogador2);
+	printf("Bem vindo %s. \n",nome_jogador2);
+
 	
 //	inicializar array dos jogadores com zero palitos em cada
-	for (i = 0;i < qtd_jogadores; i++){
+	for (i = 0;i < 2; i++){
 		jogadores[i] = 0;
 	}
 	
-	while (qtd_palitos != 0) {
+	while (qtd_palitos > 0) {
 		printf("Digite quantos palitos deseja remover: \n");
-		scanf("%d", &qtd_para_remover);
-		qtd_palitos = qtd_palitos - qtd_para_remover;
+		scanf("%d",&qtd_para_remover);
+		
+	    // verifica se pediu para tirar menos q 4 palitos e pelo menos 1
+		if (qtd_para_remover < 1 || qtd_para_remover > 3) {
+			printf("Remova de 1 a 3 palitos \n");
+		} else
+		// verifica se a quantidade que o jogador quer tirar, ainda pode ser tirada
+		if ((qtd_palitos - qtd_para_remover) < 0 ) {
+			printf("Voce pode remover apenas %d palito(s) \n", qtd_palitos);
+		} else {
+			printf("Removendo %d palitos \n", qtd_para_remover);
+			qtd_palitos = qtd_palitos - qtd_para_remover;
+			printf("Restam %d palitos \n", qtd_palitos);
+			qtd_para_remover = 0;
+		}
 	}
+	
+	printf("-----------------Fim do jogo!-------------------------");
+	
 }
 
 void jogo_nim() {
