@@ -1,10 +1,10 @@
-//
-//  main.c
-//  palitos
-//
-//  Created by Renan Gurgel on 11/4/15.
-//  Copyright © 2015 vitoria. All rights reserved.
-//
+	//
+	//  main.c
+	//  palitos
+	//
+	//  Created by Renan Gurgel on 11/4/15.
+	//  Copyright © 2015 vitoria. All rights reserved.
+	//
 
 #include <stdio.h>
 int is_par(int number);
@@ -13,60 +13,75 @@ void jogo_nim();
 
 
 int main(int argc, const char * argv[]) {
-    int matricula;
-    printf("Digite sua matrícula: \n");
-    scanf("%d",&matricula);
-    
-//   Comecar a transformar um inteiro em um array
-    /* count number of digits */
-    int c = 0; /* digit position */
-    int n = matricula;
-    
-    while (n != 0)
-    {
-        n /= 10;
-        c++;
-    }
-    
-    int numberArray[c];
-    
-    c = 0;
-    n = matricula;
-    
-    /* extract each digit */
-    while (n != 0)
-    {
-        numberArray[c] = n % 10;
-        n /= 10;
-        c++;
-    }
-    
-//    finaliza a transformacao de um inteiro em um array
-
-//	Comeca a mostrar a soma da matricula
-    int i;
-    int sum = 0;
-    
-    for (i=0;i<c;i++) {
-//        printf("Posicao %d: ", i);
-//        printf("%d", numberArray[i]);
-//        printf("\n");
-        sum = sum + numberArray[i];
-    }
-    
-    int sum_matricula = sum;
-    
-    printf("A soma da sua matricula é: %d \n", sum_matricula);
+	int matricula;
+	int continuar_jogando = 1;
 	
-//	fim soma matricula
-	
-	if (is_par(sum_matricula) == 1) {
-		jogo_par_ou_impar();
-		return 0;
-	} else {
-		jogo_nim();
+	while(continuar_jogando == 1) {
+		
+		printf("Digite sua matrícula: \n");
+		scanf("%d",&matricula);
+		
+			// Comecar a transformar um inteiro em um array
+		/* count number of digits */
+		int c = 0; /* digit position */
+		int n = matricula;
+		
+		while (n != 0)
+			{
+			n /= 10;
+			c++;
+			}
+		
+		int numberArray[c];
+		
+		c = 0;
+		n = matricula;
+		
+		/* extract each digit */
+		while (n != 0)
+			{
+			numberArray[c] = n % 10;
+			n /= 10;
+			c++;
+			}
+		
+			//    finaliza a transformacao de um inteiro em um array
+		
+			//  Comeca a mostrar a soma da matricula
+		int i;
+		int sum = 0;
+		
+		for (i=0;i<c;i++) {
+    //        printf("Posicao %d: ", i);
+	//        printf("%d", numberArray[i]);
+	//        printf("\n");
+			sum = sum + numberArray[i];
+		}
+		
+		int sum_matricula = sum;
+		
+		printf("A soma da sua matricula é: %d \n", sum_matricula);
+		
+			//  fim soma matricula
+		
+		if (is_par(sum_matricula) == 1) {
+			jogo_par_ou_impar();
+		} else {
+			jogo_nim();
+		}
+		
+		char jogar_novamente[1];
+		printf("Gostaria de continuar jogando? digite s ou n \n");
+		scanf("%s", jogar_novamente);
+		
+		if(jogar_novamente[0] == 's') {
+			continuar_jogando = 1;
+		}
+		else {
+			continuar_jogando = 0;
+			break;
+		}
 	}
-	
 	return 0;
 }
 
@@ -90,14 +105,14 @@ void jogo_par_ou_impar() {
 	printf("Nome jogador 1: ");
 	scanf("%s",nome_jogador1);
 	printf("Bem vindo %s. \n",nome_jogador1);
-
+	
 	
 	printf("Nome jogador 2: ");
 	scanf("%s",nome_jogador2);
 	printf("Bem vindo %s. \n",nome_jogador2);
-
 	
-//	inicializar array dos jogadores com zero palitos em cada
+	
+		//  inicializar array dos jogadores com zero palitos em cada
 	for (i = 0;i < 2; i++){
 		jogadores[i] = 0;
 	}
@@ -114,34 +129,34 @@ void jogo_par_ou_impar() {
 			
 			printf("Digite quantos palitos deseja remover: \n");
 			scanf("%d",&qtd_para_remover);
-		
-			// verifica se pediu para tirar menos q 4 palitos e pelo menos 1
+			
+				// verifica se pediu para tirar menos q 4 palitos e pelo menos 1
 			if (qtd_para_remover < 1 || qtd_para_remover > 3) {
 				printf("Remova de 1 a 3 palitos \n");
 				break;
 			} else
-				// verifica se a quantidade que o jogador quer tirar, ainda pode ser tirada
+					// verifica se a quantidade que o jogador quer tirar, ainda pode ser tirada
 				if ((qtd_palitos - qtd_para_remover) < 0 ) {
 					printf("Voce pode remover apenas %d palito(s) \n", qtd_palitos);
 					break;
-			} else {
-				printf("Removendo %d palitos \n", qtd_para_remover);
-				qtd_palitos = qtd_palitos - qtd_para_remover;
-				// adicionando os palitos removidos para o jogador q removeu
-				jogadores[j] += qtd_para_remover;
-				
-				if (j == 0) {
-					printf("O jogador: %s tem agora %d palitos \n", nome_jogador1, jogadores[j]);
 				} else {
-					printf("O jogador: %s tem agora %d palitos \n", nome_jogador2, jogadores[j]);
+					printf("Removendo %d palitos \n", qtd_para_remover);
+					qtd_palitos = qtd_palitos - qtd_para_remover;
+						// adicionando os palitos removidos para o jogador q removeu
+					jogadores[j] += qtd_para_remover;
+					
+					if (j == 0) {
+						printf("O jogador: %s tem agora %d palitos \n", nome_jogador1, jogadores[j]);
+					} else {
+						printf("O jogador: %s tem agora %d palitos \n", nome_jogador2, jogadores[j]);
+					}
+					
+					
+					printf("Palitos do jogador 1: %d \n", jogadores[0]);
+					printf("Palitos do jogador 2: %d \n", jogadores[1]);
+					printf("Restam %d palitos \n", qtd_palitos);
+					qtd_para_remover = 0;
 				}
-
-
-				printf("Palitos do jogador 1: %d \n", jogadores[0]);
-				printf("Palitos do jogador 2: %d \n", jogadores[1]);
-				printf("Restam %d palitos \n", qtd_palitos);
-				qtd_para_remover = 0;
-			}
 		}
 	}
 	
@@ -173,7 +188,7 @@ void jogo_nim() {
 	printf("Bem vindo %s. \n",nome_jogador2);
 	
 	
-		//	inicializar array dos jogadores com zero palitos em cada
+		//  inicializar array dos jogadores com zero palitos em cada
 	for (i = 0;i < 2; i++){
 		jogadores[i] = 0;
 	}
